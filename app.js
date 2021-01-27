@@ -45,6 +45,9 @@ app.use("/exercises", exerciseRoutes);
 app.use("/workouts", workoutRoutes);
 app.use("/user", userRoutes);
 
+
+// if you reach this route (then none of the other routes could be used)
+// then return error message
 app.use((req, res, next) => {
     const error = new Error("Not found");
     error.status = 404;

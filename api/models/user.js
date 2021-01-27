@@ -6,7 +6,7 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        /*use match to set an email regEx to ensure the String fits a specific pattern*/
+        /* use match to set an email regEx to ensure the String fits a specific pattern*/
         match: /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
     },
     password: {
