@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const Exercise = require("../models/exercise");
 
 exports.exercises_get_all = (req, res, next) => {
@@ -58,7 +57,7 @@ exports.exercises_create_exercise = (req, res, next) => {
                 }
             });
         })
-        /*catch potential errors*/
+        // catch potential errors
         .catch(err => {
             console.log(err);
             res.status(500).json({

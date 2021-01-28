@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const multer = require('multer');
 const checkAuth = require("../middleware/check-auth");
 
-/*Import exercise schema*/
+// import exercise schema
 const Exercise = require("../models/exercise");
 
 const ExerciseController = require("../controllers/exercises");
