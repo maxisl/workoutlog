@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 
 const User = require("../models/user");
 
+//FIXME: maybe connection to database (mongoDB atlas) faulty?
 exports.user_create_user = (req, res, next) => {
     User.find({
         email: req.body.email
@@ -15,9 +16,10 @@ exports.user_create_user = (req, res, next) => {
                     message: "Mail already exists"
                 });
             } else {
-                /*use salt = 10 so the password can't be translated with a dictionary table*/
+                // use salt = 10 so the password can't be translated with a dictionary table
                 bcrypt.hash(req.body.password, 10, (err, hash) => {
                     if (err) {
+                        //FIXME ERROR IS HERE
                         return res.status(500).json({
                             error: err
                         });
@@ -48,6 +50,7 @@ exports.user_create_user = (req, res, next) => {
         });
 }
 
+
 exports.user_login = (req, res, next) => {
     User.find({email: req.body.email})
         .exec()
@@ -61,7 +64,7 @@ exports.user_login = (req, res, next) => {
             bcrypt.compare(req.body.password, user[0].password, (err, result) => {
                 if (err) {
                     return res.status(401).json({
-                        message: "Auth failed"
+                        message: "Authentication failed"
                     });
                 }
                 if (result) {
@@ -77,12 +80,12 @@ exports.user_login = (req, res, next) => {
                         }
                     );
                     return res.status(200).json({
-                        message: "Auth successful",
+                        message: "Authentication successful",
                         token: token
                     });
                 }
                 return res.status(401).json({
-                    message: "Auth failed"
+                    message: "Authentication failed"
                 });
             });
         })
