@@ -16,7 +16,7 @@ const workoutRoutes = require("./api/routes/workouts");
 const userRoutes = require("./api/routes/user");
 
 //Password is dynamically programmed into the nodemon.json file (deprecated, as a local db is used here)
-// mongoose.connect("mongodb://localhost/workout_log", {useNewUrlParser: true, useUnifiedTopology: true});
+//mongoose.connect("mongodb://localhost/workout_log", {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.connect("mongodb+srv://Maxis:" + process.env.MONGO_PW + "@workout-log.hjsge.mongodb.net/workout-log?retryWrites=true&w=majority",
     {useNewUrlParser: true ,useUnifiedTopology: true});
 mongoose.set('useCreateIndex', true);

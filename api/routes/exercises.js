@@ -21,7 +21,7 @@ router.post("/", checkAuth, ExerciseController.exercises_create_exercise);
 /*fetches the data from the database*/
 router.get("/:exerciseId", ExerciseController.exercises_get_exercise);
 
-/*update an exercise, to unterstand understand patch route (academind video 7)*/
+/*update an exercise, to understand understand patch route (academind video 7)*/
 router.patch("/:exerciseId", checkAuth, ExerciseController.exercises_update_exercise);
 
 router.delete("/:exerciseId", checkAuth, ExerciseController.exercises_delete_exercise);

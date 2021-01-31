@@ -4,10 +4,11 @@ const mongoose = require("mongoose");
 
 const User = require("../models/user");
 
-//FIXME: maybe connection to database (mongoDB atlas) faulty?
+
 exports.user_create_user = (req, res, next) => {
+    // check if user email already exists in database
     User.find({
-        email: req.body.email
+        email: req.body.email.toLowerCase()
     })
         .exec()
         .then(user => {
@@ -19,7 +20,6 @@ exports.user_create_user = (req, res, next) => {
                 // use salt = 10 so the password can't be translated with a dictionary table
                 bcrypt.hash(req.body.password, 10, (err, hash) => {
                     if (err) {
-                        //FIXME ERROR IS HERE
                         return res.status(500).json({
                             error: err
                         });
@@ -52,9 +52,10 @@ exports.user_create_user = (req, res, next) => {
 
 
 exports.user_login = (req, res, next) => {
-    User.find({email: req.body.email})
+    // add toLowerCase() so case doesn't matter for email
+    User.find({email: req.body.email.toLowerCase()})
         .exec()
-        /* user is an array with only one entry (see user signup route)*/
+        // user is an array with only one entry (see user signup route)
         .then(user => {
             if (user.length < 1) {
                 return res.status(401).json({
