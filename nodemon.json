@@ -1,6 +1,6 @@
 {
   "env": {
     "MONGO_PW": "Kyppog-sepzoc-jizco4",
-    "JWT_KEY": "secret"
+    "JWT_KEY": "secretkey"
   }
 }

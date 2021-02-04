@@ -10,20 +10,21 @@ const Exercise = require("../models/exercise");
 const ExerciseController = require("../controllers/exercises");
 
 
-/*ONLY "/" because you're already in "/products" when you're on this page*/
-/*Returns all products*/
+/*ONLY "/" because you're already in "/exercises" when you're on this page*/
+// Returns all exercises
 router.get("/", ExerciseController.exercises_get_all);
 
 /*HANDLE POST REQUESTS*/
-/*upload.single() will upload (only) one file*/
+// create an exercise for the db (needs authentication)
 router.post("/", checkAuth, ExerciseController.exercises_create_exercise);
 
-/*fetches the data from the database*/
+// fetches a specific exercise from the database
 router.get("/:exerciseId", ExerciseController.exercises_get_exercise);
 
-/*update an exercise, to understand understand patch route (academind video 7)*/
+// update an exercise (needs authentication)
 router.patch("/:exerciseId", checkAuth, ExerciseController.exercises_update_exercise);
 
+// delete a specific exercise (needs authentication)
 router.delete("/:exerciseId", checkAuth, ExerciseController.exercises_delete_exercise);
 
 module.exports = router;

@@ -52,7 +52,7 @@ exports.user_create_user = (req, res, next) => {
 
 
 exports.user_login = (req, res, next) => {
-    // add toLowerCase() so case doesn't matter for email
+    // add toLowerCase() so case doesn't matter for entered email
     User.find({email: req.body.email.toLowerCase()})
         .exec()
         // user is an array with only one entry (see user signup route)
@@ -62,6 +62,7 @@ exports.user_login = (req, res, next) => {
                     message: "Authentication failed"
                 });
             }
+            // compare password entered by user with the one stored in the db
             bcrypt.compare(req.body.password, user[0].password, (err, result) => {
                 if (err) {
                     return res.status(401).json({
@@ -69,14 +70,16 @@ exports.user_login = (req, res, next) => {
                     });
                 }
                 if (result) {
+                    // create JWT
                     const token = jwt.sign(
                         {
                             email: user[0].email,
                             userId: user[0]._id
                         },
+                        // private key stored in nodemon.json
                         process.env.JWT_KEY,
                         {
-                            /* duration in which the token will expire*/
+                            // duration in which the token will expire
                             expiresIn: "1h"
                         }
                     );

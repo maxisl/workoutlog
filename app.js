@@ -48,8 +48,8 @@ app.use((req, res, next) => {
     next();
 });
 
-/*forward to exercises.js*/
-//routes which should handle request = middleware
+// forward to exercises.js
+// routes which should handle request = middleware
 app.use("/exercises", exerciseRoutes);
 app.use("/workouts", workoutRoutes);
 app.use("/user", userRoutes);
